@@ -6,3 +6,5 @@ package com.example.listapp.common
 
 
 const val BASE_URL = "https://jsonplaceholder.typicode.com/"
+
+const val SEND_POST_TO_DETAIL_PAGE = "SEND_POST_TO_DETAIL_PAGE"

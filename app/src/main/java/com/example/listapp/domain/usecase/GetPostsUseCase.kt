@@ -16,7 +16,6 @@ class GetPostsUseCase @Inject constructor(private val repository: PostRepository
 
     operator fun invoke(): Flow<Resource<List<PostModel>>> = flow {
         try {
-            emit(Resource.Loading)
             val posts = repository.getPosts().map { it.toPostModel() }
             emit(Resource.Success<List<PostModel>>(posts))
         }catch (e: Exception){

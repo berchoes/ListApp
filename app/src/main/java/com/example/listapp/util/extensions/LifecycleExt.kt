@@ -1,4 +1,4 @@
-package com.example.listapp.util
+package com.example.listapp.util.extensions
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner

@@ -1,7 +1,7 @@
 package com.example.listapp.presentation.details
 
 import androidx.lifecycle.SavedStateHandle
-import com.example.listapp.base.BaseViewModel
+import androidx.lifecycle.ViewModel
 import com.example.listapp.common.SEND_POST_TO_DETAIL_PAGE
 import com.example.listapp.domain.model.PostModel
 import com.google.gson.Gson
@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PostDetailsViewModel @Inject constructor(
    private val savedStateHandle: SavedStateHandle
-) : BaseViewModel() {
+) : ViewModel() {
 
      var currentPost: PostModel? = null
         get() {

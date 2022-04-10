@@ -1,7 +1,7 @@
 package com.example.listapp.presentation.home
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.listapp.base.BaseViewModel
 import com.example.listapp.common.Resource
 import com.example.listapp.domain.model.PostModel
 import com.example.listapp.domain.usecase.GetPostsUseCase
@@ -15,10 +15,11 @@ import javax.inject.Inject
 /**
  * Created by Berk Ç. on 8.04.2022.
  */
+
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getPostsUseCase: GetPostsUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _posts = MutableStateFlow<List<PostModel>>(emptyList())
     val posts: StateFlow<List<PostModel>> = _posts
@@ -30,12 +31,13 @@ class HomeViewModel @Inject constructor(
         getPosts()
     }
 
-    private fun getPosts() =
+    private fun getPosts() {
         getPostsUseCase().onEach {
             when (it) {
                 is Resource.Success -> _posts.value = it.data
-                is Resource.Error -> _errorMessage.value =  it.errorMessage
-                is Resource.Loading -> _isLoading.value = true
+                is Resource.Error -> _errorMessage.value = it.errorMessage
             }
         }.launchIn(viewModelScope)
+    }
+
 }

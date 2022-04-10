@@ -13,9 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ListApp">
         <activity
-            android:name=".presentation.details.PostDetailsActivity"
-            android:exported="true" />
-        <activity
             android:name=".presentation.home.HomeActivity"
             android:exported="true">
             <intent-filter>

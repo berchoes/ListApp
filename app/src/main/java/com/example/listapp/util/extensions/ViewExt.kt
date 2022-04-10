@@ -1,4 +1,4 @@
-package com.example.listapp.util
+package com.example.listapp.util.extensions
 
 import android.view.View
 

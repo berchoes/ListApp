@@ -3,22 +3,22 @@ package com.example.listapp.presentation.home
 /**
  * Created by Berk Ç. on 9.04.2022.
  */
+
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listapp.databinding.ItemPostListBinding
 import com.example.listapp.domain.model.PostModel
 import javax.inject.Inject
-import android.view.animation.Animation
-
-import android.view.animation.ScaleAnimation
 
 
 class PostListAdapter @Inject constructor() : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
 
-    private var items = listOf<PostModel>()
+    private var items = mutableListOf<PostModel>()
     var onItemClicked: ((PostModel) -> Unit)? = null
 
     private var lastPosition = -1
@@ -39,7 +39,6 @@ class PostListAdapter @Inject constructor() : RecyclerView.Adapter<PostListAdapt
 
     override fun onBindViewHolder(holder: PostListAdapter.ViewHolder, position: Int) {
         holder.bind(items[position])
-        setListAnimation(holder.itemView,position)
     }
 
 
@@ -54,30 +53,22 @@ class PostListAdapter @Inject constructor() : RecyclerView.Adapter<PostListAdapt
             }
 
             binding.tvItem.text = item.title
+
+            binding.icDelete.setOnClickListener {
+                deleteItem(adapterPosition)
+            }
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitList(list: List<PostModel>) {
-            items = list
-            notifyDataSetChanged()
+    private fun deleteItem(position: Int) {
+        items.removeAt(position)
+        notifyDataSetChanged()
     }
 
-    private fun setListAnimation(view: View, position: Int) {
-        if (position > lastPosition) {
-            val anim = ScaleAnimation(
-                0.0f,
-                1.0f,
-                0.0f,
-                1.0f,
-                Animation.RELATIVE_TO_SELF,
-                0.5f,
-                Animation.RELATIVE_TO_SELF,
-                0.5f
-            )
-            anim.duration = (300 + position*4).toLong()
-            view.startAnimation(anim)
-            lastPosition = position
-        }
+    @SuppressLint("NotifyDataSetChanged")
+    fun submitList(list: List<PostModel>) {
+        items = list.toMutableList()
+        notifyDataSetChanged()
     }
 }

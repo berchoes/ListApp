@@ -34,13 +34,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     }
 
     private val onPostClicked: (PostModel) -> Unit = {
-        val bundle = Bundle()
-        bundle.putString(SEND_POST_TO_DETAIL_PAGE, Gson().toJson(it))
-        val detailsFragment = PostDetailsFragment()
-        detailsFragment.arguments = bundle
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frameLayout, detailsFragment).addToBackStack(DETAILS_FRAGMENT)
-        transaction.commit()
+        goToDetailsFragment(it)
     }
 
     private fun observeViewModel() {
@@ -58,5 +52,27 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
                 binding.rvPosts.gone()
             }
         }
+
+        fetch(viewModel.isFragmentVisible){
+            if (it) binding.frameLayout.visible() else binding.frameLayout.gone()
+        }
+    }
+
+    private fun goToDetailsFragment(post: PostModel){
+        setFragmentState(isVisible = true)
+
+        val bundle = Bundle()
+        bundle.putString(SEND_POST_TO_DETAIL_PAGE, Gson().toJson(post))
+        val detailsFragment = PostDetailsFragment()
+        detailsFragment.arguments = bundle
+
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(R.anim.slide_in,0,0,R.anim.fade_out)
+        transaction.replace(R.id.frameLayout, detailsFragment).addToBackStack(DETAILS_FRAGMENT)
+        transaction.commit()
+    }
+
+    fun setFragmentState(isVisible : Boolean) {
+        viewModel.setFragmentState(isVisible)
     }
 }

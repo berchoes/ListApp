@@ -6,10 +6,7 @@ package com.example.listapp.presentation.home
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.ScaleAnimation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listapp.databinding.ItemPostListBinding
 import com.example.listapp.domain.model.PostModel
@@ -21,9 +18,7 @@ class PostListAdapter @Inject constructor() : RecyclerView.Adapter<PostListAdapt
     private var items = mutableListOf<PostModel>()
     var onItemClicked: ((PostModel) -> Unit)? = null
 
-    private var lastPosition = -1
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostListAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemBinding = ItemPostListBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(itemBinding)
@@ -37,7 +32,7 @@ class PostListAdapter @Inject constructor() : RecyclerView.Adapter<PostListAdapt
         return position
     }
 
-    override fun onBindViewHolder(holder: PostListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position])
     }
 

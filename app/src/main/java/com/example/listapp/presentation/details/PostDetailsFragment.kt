@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.listapp.R
 import com.example.listapp.databinding.FragmentPostDetailsBinding
+import com.example.listapp.presentation.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -31,4 +32,8 @@ class PostDetailsFragment : Fragment(R.layout.fragment_post_details) {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        (activity as HomeActivity).setFragmentState(false)
+    }
 }

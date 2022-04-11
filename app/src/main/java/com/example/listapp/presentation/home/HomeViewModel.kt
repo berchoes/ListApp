@@ -27,6 +27,9 @@ class HomeViewModel @Inject constructor(
     private val _errorMessage = MutableStateFlow<String?>(null)
     val errorMessage: StateFlow<String?> = _errorMessage
 
+    private val _isFragmentVisible = MutableStateFlow(false)
+    val isFragmentVisible: StateFlow<Boolean> = _isFragmentVisible
+
     init {
         getPosts()
     }
@@ -40,4 +43,7 @@ class HomeViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
+    fun setFragmentState(isVisible: Boolean){
+        _isFragmentVisible.value = isVisible
+    }
 }

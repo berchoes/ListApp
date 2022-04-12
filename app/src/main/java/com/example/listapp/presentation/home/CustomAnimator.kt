@@ -15,7 +15,7 @@ import java.util.*
  * Created by Berk Ç. on 11.04.2022.
  */
 
-// this class is a copy of the DefaultItemAnimator class with some changes.
+// this class is a copy of  DefaultItemAnimator class with some changes.
 
 open class CustomAnimator : SimpleItemAnimator() {
     private val mPendingRemovals = ArrayList<RecyclerView.ViewHolder>()

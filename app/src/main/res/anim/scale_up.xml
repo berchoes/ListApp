@@ -13,4 +13,8 @@
         android:pivotX="50%"
         android:pivotY="50%" />
 
+    <rotate
+        android:fromDegrees="-15"
+        android:toDegrees="0" />
+
 </set>

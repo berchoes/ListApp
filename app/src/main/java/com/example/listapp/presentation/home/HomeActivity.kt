@@ -31,6 +31,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         observeViewModel()
         binding.rvPosts.adapter = postListAdapter
         postListAdapter.onItemClicked = onPostClicked
+        binding.rvPosts.itemAnimator = CustomAnimator()
     }
 
     private val onPostClicked: (PostModel) -> Unit = {
@@ -53,12 +54,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             }
         }
 
-        fetch(viewModel.isFragmentVisible){
+        fetch(viewModel.isFragmentVisible) {
             if (it) binding.frameLayout.visible() else binding.frameLayout.gone()
         }
     }
 
-    private fun goToDetailsFragment(post: PostModel){
+    private fun goToDetailsFragment(post: PostModel) {
         setFragmentState(isVisible = true)
 
         val bundle = Bundle()
@@ -67,12 +68,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         detailsFragment.arguments = bundle
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(R.anim.slide_in,0,0,R.anim.fade_out)
+        transaction.setCustomAnimations(R.anim.slide_in, 0, 0, R.anim.fade_out)
         transaction.replace(R.id.frameLayout, detailsFragment).addToBackStack(DETAILS_FRAGMENT)
         transaction.commit()
     }
 
-    fun setFragmentState(isVisible : Boolean) {
+    fun setFragmentState(isVisible: Boolean) {
         viewModel.setFragmentState(isVisible)
     }
 }

@@ -3,5 +3,4 @@
     android:animation="@anim/scale_up"
     android:animationOrder="normal"
     android:delay="15%">
-
 </layoutAnimation>

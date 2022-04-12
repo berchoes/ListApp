@@ -10,9 +10,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPosts"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layoutAnimation="@anim/layout_animation"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_post_list" />
 
@@ -29,9 +32,9 @@
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true" />
+        android:clickable="true"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

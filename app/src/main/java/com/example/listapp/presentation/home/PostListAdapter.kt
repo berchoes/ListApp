@@ -39,7 +39,7 @@ class PostListAdapter @Inject constructor() : RecyclerView.Adapter<PostListAdapt
 
     override fun getItemCount() = items.size
 
-    inner class ViewHolder(private val binding: ItemPostListBinding) :
+    inner class ViewHolder(private val binding: ItemPostListBinding):
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PostModel) {
 
@@ -55,10 +55,9 @@ class PostListAdapter @Inject constructor() : RecyclerView.Adapter<PostListAdapt
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun deleteItem(position: Int) {
         items.removeAt(position)
-        notifyDataSetChanged()
+        notifyItemRemoved(position)
     }
 
     @SuppressLint("NotifyDataSetChanged")
